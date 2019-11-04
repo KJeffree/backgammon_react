@@ -16,7 +16,7 @@ const GameGrid = (props) => {
         } else {
             name = "triangle4"
         }
-        return <Point player={props.player} key={index} color={point.color} counterNumber={point.number} pointNumber={index} name={`item${index}`} triangle={name} position={index} />
+        return <Point onCounterClick={props.onCounterClick} player={props.player} key={index} hilighted={point.hilight} color={point.color} counterNumber={point.number} pointNumber={index} name={`item${index} ${point.hilight ? "hilighted" : null}`} triangle={name} position={index} />
     })
     return (
         <div className="gameGrid">

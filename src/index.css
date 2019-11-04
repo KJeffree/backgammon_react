@@ -17,6 +17,14 @@ code {
   width: 50px;
 }
 
+.dieContainer{
+  margin: 20px;
+}
+
+.hilighted {
+  border: 2px solid red;
+}
+
 img.point {
   height: 250px;
   width: 50px;
