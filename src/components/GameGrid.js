@@ -1,5 +1,6 @@
 import React from 'react'
 import Point from './Point'
+import Bar from './Bar'
 
 const GameGrid = (props) => {
 
@@ -15,11 +16,13 @@ const GameGrid = (props) => {
         } else {
             name = "triangle4"
         }
-        return <Point key={index} className={`item${index} ${name}`} position={index} />
+        return <Point key={index} name={`item${index}`} triangle={name} position={index} />
     })
     return (
-        <div>
+        <div className="gameGrid">
             {pointNodes}
+            <Bar name="bar1"></Bar>
+            <Bar name="bar2"></Bar>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Point = (props) => {
     return (
-        <p>I am a point</p>
+        <img className={`${props.name} point`} src={`${props.triangle}.png`} alt="point" />
     )
 }
 
