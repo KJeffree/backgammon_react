@@ -7,7 +7,7 @@ const Point = (props) => {
         if (props.triangle === "triangle1" || props.triangle === "triangle2") {
             checkerNodes.push(<Checker player={props.player} onCounterClick={props.onCounterClick} pointIndex={props.pointNumber} key={i} name={`checker${5 - 1 - i}`} color={props.color}></Checker>)
         } else {
-            checkerNodes.push(<Checker player={props.player} pointIndex={props.pointNumber} key={i} name={`checker${i}`} color={props.color}></Checker>)
+            checkerNodes.push(<Checker player={props.player} onCounterClick={props.onCounterClick} pointIndex={props.pointNumber} key={i} name={`checker${i}`} color={props.color}></Checker>)
         }
         
     }
