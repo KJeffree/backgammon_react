@@ -6,17 +6,17 @@ const GameGrid = (props) => {
 
     const pointNodes = props.points.map((point, index) => {
         let name = null
-        if (index <= 11 && index % 2 == 0)
+        if (index <= 11 && index % 2 === 0)
         {
             name = "triangle1"
-        } else if (index <= 11 && index % 2 != 0) {
+        } else if (index <= 11 && index % 2 !== 0) {
             name = "triangle2"
-        } else if (index > 11 && index %2 == 0) {
+        } else if (index > 11 && index %2 === 0) {
             name = "triangle3"
         } else {
             name = "triangle4"
         }
-        return <Point key={index} name={`item${index}`} triangle={name} position={index} />
+        return <Point player={props.player} key={index} color={point.color} counterNumber={point.number} pointNumber={index} name={`item${index}`} triangle={name} position={index} />
     })
     return (
         <div className="gameGrid">

@@ -12,13 +12,65 @@ code {
     monospace;
 }
 
-img.point {
-  height: 200px;
+.checker {
+  height: 50px;
   width: 50px;
 }
 
+img.point {
+  height: 250px;
+  width: 50px;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+div.point {
+  display: grid;
+  grid-column: 50px;
+  grid-template-rows: repeat(5, 50px);
+  max-height: 250px;
+  min-height: 250px;
+}
+
+.checker0 {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.checker1 {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.checker2 {
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.checker3 {
+  grid-row-start: 4;
+  grid-row-end: 5;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.checker4 {
+  grid-row-start: 5;
+  grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
 .bar {
-  height: 198px;
+  height: 248px;
   width: 50px;
   border: 1px solid black;
 }
@@ -29,8 +81,8 @@ img.point {
   display: grid;
   grid-column: repeat(13, 50px);
   grid-row: 1fr, 1fr;
-  min-height: 400px;
-  max-height: 300px;
+  min-height: 500px;
+  max-height: 500px;
   min-width: 655px;
   max-width: 655px;
 }

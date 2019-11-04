@@ -33,13 +33,15 @@ class GameContainer extends React.Component {
             ],
             bar: [0, 0],
             player: 1,
-            dice: {1: 0, 2: 0}
+            dice: {1: 1, 2: 1}
         }
     }
 
+    
+
     render() {
         return (
-            <GameGrid points={this.state.points}/>
+            <GameGrid player={this.state.player} bar={this.state.bar} dice={this.state.dice} points={this.state.points}/>
         )
     }
 
