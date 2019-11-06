@@ -11,8 +11,8 @@ const DieContainer = (props) => {
 
     return (
         <div className="dieContainer" onClick={handleDieClick}>
-            <Die dice={props.dice[1]}/>
-            <Die dice={props.dice[2]}/>
+            <Die dice={props.dice[0].number}/>
+            <Die dice={props.dice[1].number}/>
         </div>
     )
 }

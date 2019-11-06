@@ -2,6 +2,11 @@ import React from 'react'
 import Checker from './Checker'
 
 const Point = (props) => {
+
+    function handlePointClick(event) {
+        props.onPointClick(props.pointNumber);
+    }
+
     let checkerNodes = [];
     for(let i = 0; i < props.counterNumber; i++) {
         if (props.triangle === "triangle1" || props.triangle === "triangle2") {
@@ -13,7 +18,7 @@ const Point = (props) => {
     }
     return (
         <div className={`${props.name} point`}>
-            <img className={`point`} src={`${props.triangle}.png`} alt="point" />
+            <img className={`point`} src={`${props.triangle}.png`} alt="point" onClick={handlePointClick} />
             {checkerNodes}
         </div>
     )
