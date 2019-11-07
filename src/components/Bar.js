@@ -5,7 +5,7 @@ const Bar = (props) => {
     
     let counterNodes = []
     for (let i = 0; i < props.counters; i++){
-        counterNodes.push(<Checker color={props.color} name={`checker${5 - 1 - i}`}></Checker>)
+        counterNodes.push(<Checker key={i} color={props.color} name={`checker${5 - 1 - i}`}></Checker>)
     }
   
     return (
