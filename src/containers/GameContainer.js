@@ -7,41 +7,42 @@ class GameContainer extends React.Component {
         super(props)
         this.state = {
             points: [
-                {color: 1, number: 2, hilight: false},
-                {color: 0, number: 0, hilight: false},
                 {color: 0, number: 0, hilight: false},
                 {color: 0, number: 0, hilight: false},
                 {color: 0, number: 0, hilight: false},
                 {color: 2, number: 5, hilight: false},
-                {color: 0, number: 0, hilight: false},
-                {color: 2, number: 3, hilight: false},
-                {color: 0, number: 0, hilight: false},
-                {color: 0, number: 0, hilight: false},
-                {color: 0, number: 0, hilight: false},
-                {color: 1, number: 5, hilight: false},
+                {color: 2, number: 5, hilight: false},
                 {color: 2, number: 5, hilight: false},
                 {color: 0, number: 0, hilight: false},
                 {color: 0, number: 0, hilight: false},
                 {color: 0, number: 0, hilight: false},
-                {color: 1, number: 3, hilight: false},
                 {color: 0, number: 0, hilight: false},
+                {color: 0, number: 0, hilight: false},
+                {color: 0, number: 0, hilight: false},
+                {color: 0, number: 0, hilight: false},
+                {color: 0, number: 0, hilight: false},
+                {color: 0, number: 0, hilight: false},
+                {color: 0, number: 0, hilight: false},
+                {color: 0, number: 0, hilight: false},
+                {color: 0, number: 0, hilight: false},
+                {color: 1, number: 5, hilight: false},
+                {color: 1, number: 5, hilight: false},
                 {color: 1, number: 5, hilight: false},
                 {color: 0, number: 0, hilight: false},
                 {color: 0, number: 0, hilight: false},
-                {color: 0, number: 0, hilight: false},
-                {color: 0, number: 0, hilight: false},
-                {color: 2, number: 2, hilight: false}
+                {color: 0, number: 0, hilight: false}
             ],
             bar: [0, 0],
             player: {number: 1, diceRolled: false},
             dice: [{number: 1, used: true, double: false}, {number: 1, used: true, double:false}],
-            selectedCounterIndex: null
+            selectedCounterIndex: null,
+            countersRemoved: [0, 0]
         }
         this.handleDieClick = this.handleDieClick.bind(this)
         this.hilightPoints = this.hilightPoints.bind(this)
         this.onPointClick = this.onPointClick.bind(this)
         this.handlePlayerChange = this.handlePlayerChange.bind(this)
-        this.checkAllCountersInHome = this.checkAllCountersInHome.bind(this)
+        this.checkAllCountersInHomeOrRemoved = this.checkAllCountersInHomeOrRemoved.bind(this)
     }
 
     handlePlayerChange() {
@@ -116,7 +117,7 @@ class GameContainer extends React.Component {
             newPoints[pointIndex].number += 1
             newPoints[pointIndex].color = this.state.player.number
             newPoints[pointIndex].hilight = false
-            if (this.state.bar[this.state.player.number - 1] == 0) {
+            if (this.state.bar[this.state.player.number - 1] == 0 && !this.checkAllCountersInHomeOrRemoved()) {
                 for(let point of newPoints){
                     point.hilight = false
                 }
@@ -126,7 +127,7 @@ class GameContainer extends React.Component {
         
     }
 
-    checkAllCountersInHome(){
+    checkAllCountersInHomeOrRemoved(){
         let numberOfCounters = 0
         if (this.state.player.number == 2){
             for (let i=0; i < 6; i++){
@@ -134,12 +135,14 @@ class GameContainer extends React.Component {
                     numberOfCounters += this.state.points[i].number                    
                 }
             }
+            numberOfCounters += this.state.bar[1]
         } else {
             for (let i=23; i > 17; i--){
                 if (this.state.points[i].color == this.state.player.number){
                     numberOfCounters += this.state.points[i].number                    
                 }
             }
+            numberOfCounters += this.state.bar[0]
         }
         return numberOfCounters == 15 ? true : false
     }
@@ -155,6 +158,7 @@ class GameContainer extends React.Component {
         }
         let targetPoint1 = this.state.player.number == 1 ? newPoints[pointIndex + this.state.dice[0].number] : newPoints[pointIndex - this.state.dice[0].number]
         let targetPoint2 = this.state.player.number == 1 ? newPoints[pointIndex + this.state.dice[1].number] : newPoints[pointIndex - this.state.dice[1].number]
+
         if (((pointIndex + this.state.dice[0].number) > 23 || (pointIndex + this.state.dice[1].number) > 23) && this.state.player.number == 1){
             targetPoint1 = null;
         }
@@ -169,6 +173,24 @@ class GameContainer extends React.Component {
 
         if (targetPoint2 != null){
             targetPoint2.hilight = (targetPoint2.color == this.state.player.number || (targetPoint2.color != this.state.player.number && targetPoint2.number == 1) || targetPoint2.color == 0) && targetPoint2.number < 5 && this.state.dice[1].used == false ? true : false
+        }
+
+        if (this.checkAllCountersInHomeOrRemoved()){
+            let playerNumber = this.state.player.number
+            let removableCounterIndexPlayer1Die1 = this.state.dice[0].used ? null : 24 - this.state.dice[0].number
+            let removableCounterIndexPlayer1Die2 = this.state.dice[0].used ? null : 24 - this.state.dice[1].number
+            let removableCounterIndexPlayer2Die1 = this.state.dice[0].used ? null : -1 + this.state.dice[0].number
+            let removableCounterIndexPlayer2Die2 = this.state.dice[0].used ? null : -1 + this.state.dice[1].number
+
+            if (playerNumber == 2 && removableCounterIndexPlayer2Die1 == pointIndex && newPoints[pointIndex].color == this.state.player.number){
+                newPoints[pointIndex].hilight = true
+            } else if (playerNumber == 2 && removableCounterIndexPlayer2Die2 == pointIndex && newPoints[pointIndex].color == this.state.player.number){
+                newPoints[pointIndex].hilight = true
+            } else if (playerNumber == 1 && removableCounterIndexPlayer1Die1 == pointIndex && newPoints[pointIndex].color == this.state.player.number){
+                newPoints[pointIndex].hilight = true
+            } else if (playerNumber == 1 && removableCounterIndexPlayer1Die2 == pointIndex && newPoints[pointIndex].color == this.state.player.number){
+                newPoints[pointIndex].hilight = true
+            }
         }
         this.setState({points: newPoints})
     }
