@@ -19,10 +19,12 @@ code {
 
 .dieContainer{
   margin: 20px;
+  display: flex;
 }
 
 .bottom-bar {
   display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
