@@ -236,6 +236,7 @@ class GameContainer extends React.Component {
                 
                 <div className="bottom-bar">
                     <PlayerIndicatorContainer player={this.state.player}></PlayerIndicatorContainer>
+                    <p className={this.state.player.diceRolled ? "hidden" : "shown"}>Click die to roll</p>
                     <DieContainer dice={this.state.dice} handleDieRoll={this.handleDieClick} changePlayer={this.handlePlayerChange}></DieContainer>
                     <button onClick={this.handlePlayerChange}>Next Player</button>
                 </div>

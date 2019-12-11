@@ -27,6 +27,14 @@ div.player-indicator {
   margin: 20px;
 }
 
+.hidden {
+  color: white;
+}
+
+.shown {
+  color: black;
+}
+
 .checker {
   height: 50px;
   width: 50px;
