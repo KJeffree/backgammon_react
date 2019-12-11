@@ -1,6 +1,7 @@
 import React from 'react'
 import GameGrid from '../components/GameGrid'
 import DieContainer from './DieContainer'
+import PlayerIndicatorContainer from '../components/PlayerIndicator'
 
 class GameContainer extends React.Component {
     constructor(props){
@@ -230,7 +231,10 @@ class GameContainer extends React.Component {
     render() {
         return (
             <div>
+                <div className="game-grid-container">
                 <GameGrid player={this.state.player.number} onPointClick={this.onPointClick} onCounterClick={this.hilightPoints} bar={this.state.bar} dice={this.state.dice} points={this.state.points}/>
+                <PlayerIndicatorContainer player={this.state.player}></PlayerIndicatorContainer>
+                </div>
                 <div className="bottom-bar">
                     <DieContainer dice={this.state.dice} handleDieRoll={this.handleDieClick} changePlayer={this.handlePlayerChange}></DieContainer>
                     <button onClick={this.handlePlayerChange}>Next Player</button>

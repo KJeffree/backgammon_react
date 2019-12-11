@@ -12,6 +12,21 @@ code {
     monospace;
 }
 
+img.player-indicator {
+  height: 50px;
+  width: 50px;
+}
+
+div.player-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid black;
+  height: 100%;
+  padding: 10px;
+  margin: 20px;
+}
+
 .checker {
   height: 50px;
   width: 50px;
@@ -35,6 +50,10 @@ button {
 .hilighted {
   border: 1px solid red;
   padding: 0px;
+}
+
+.game-grid-container {
+  display: flex;
 }
 
 img.point {
